@@ -88,8 +88,9 @@ const getCertificate = (
     const rawCertificate: forge.pki.Certificate = certBags[index].cert as forge.pki.Certificate
 
     p7.addCertificate(rawCertificate)
-
-    certificate = getValidatedCertificate(privateKey, publicKey, rawCertificate)
+    if (!certificate) {
+      certificate = getValidatedCertificate(privateKey, publicKey, rawCertificate)
+    }
   })
 
   if (!certificate) {
